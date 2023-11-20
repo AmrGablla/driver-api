@@ -18,9 +18,9 @@ public class DriverController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Driver> GetAll()
+    public async Task<IEnumerable<Driver>> GetAll()
     {
-        return _driverService.GetDrivers();
+        return await _driverService.GetDrivers();
     }
 
     [HttpPut]
@@ -31,9 +31,9 @@ public class DriverController : ControllerBase
     }
 
     [HttpDelete]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        bool deleted = _driverService.DeleteDriver(id);
+        bool deleted = await _driverService.DeleteDriver(id);
         if (deleted)
             return NoContent();
         else return NotFound();
@@ -54,8 +54,8 @@ public class DriverController : ControllerBase
     }
 
     [HttpGet("GetAlphabetizedDrivers")]
-    public IEnumerable<Driver> GetAlphabetizedDrivers()
+    public async Task<IEnumerable<Driver>> GetAlphabetizedDrivers()
     {
-        return _driverService.GetAlphabetizedDrivers();
+        return await _driverService.GetAlphabetizedDrivers();
     }
 }

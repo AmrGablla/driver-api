@@ -18,7 +18,7 @@ if (!System.IO.File.Exists(builder.Configuration.GetConnectionString("DefaultCon
     SQLiteConnection _db = new SQLiteConnection(builder.Configuration.GetConnectionString("DefaultConnection"));
     _db.CreateTable<Driver>();
 }
-
+builder.Services.AddScoped<DbContext>();
 builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IDriverRepository, DriverRepository>();
 

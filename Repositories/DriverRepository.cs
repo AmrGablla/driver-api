@@ -5,48 +5,46 @@ namespace Repositories
 {
     public interface IDriverRepository
     {
-        void AddDriver(Driver driver);
-        void UpdateDriver(Driver driver);
-        bool DeleteDriver(Driver driver);
-        List<Driver> GetAlphabetizedDrivers();
-        List<Driver> GetDrivers();
+        Task AddDriver(Driver driver);
+        Task UpdateDriver(Driver driver);
+        Task<bool> DeleteDriver(Driver driver);
+        Task<List<Driver>> GetAlphabetizedDrivers();
+        Task<List<Driver>> GetDrivers();
     }
+
 
     public class DriverRepository : IDriverRepository
     {
-        private readonly IConfiguration _configuration;
-        private SQLiteConnection _db;
+        private DbContext _db;
 
-        public DriverRepository(IConfiguration configuration)
+        public DriverRepository(DbContext db)
         {
-            _configuration = configuration;
-            _db = new SQLiteConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+            _db = db;
         }
-        public void AddDriver(Driver driver)
+        public async Task AddDriver(Driver driver)
         {
-            _db.Insert(driver);
+            await _db.Database.InsertAsync(driver);
         }
 
-        public void UpdateDriver(Driver driver)
+        public async Task UpdateDriver(Driver driver)
         {
-            _db.Update(driver);
+            await _db.Database.UpdateAsync(driver);
         }
 
-        public bool DeleteDriver(Driver driver)
+        public async Task<bool> DeleteDriver(Driver driver)
         {
-            int numberOfRows = _db.Delete(driver);
-            if (numberOfRows == 1) return true;
-            else return false;
+            await _db.Database.DeleteAsync(driver);
+            return true;
         }
 
-        public List<Driver> GetDrivers()
+        public async Task<List<Driver>> GetDrivers()
         {
-            return _db.Query<Driver>("SELECT * FROM Drivers");
+            return await _db.Drivers.ToListAsync();
         }
 
-        public List<Driver> GetAlphabetizedDrivers()
+        public async Task<List<Driver>> GetAlphabetizedDrivers()
         {
-            return _db.Query<Driver>("SELECT * FROM Drivers").OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToList();
+            return await _db.Drivers.OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToListAsync();
         }
     }
 }

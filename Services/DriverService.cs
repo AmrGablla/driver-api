@@ -8,9 +8,9 @@ namespace Services
     {
         void AddDriver(Driver driver);
         void UpdateDriver(Driver driver);
-        bool DeleteDriver(int id);
-        List<Driver> GetDrivers();
-        List<Driver> GetAlphabetizedDrivers();
+        Task<bool> DeleteDriver(int id);
+        Task<List<Driver>> GetDrivers();
+        Task<List<Driver>> GetAlphabetizedDrivers();
         void Add10Randoms();
     }
 
@@ -33,19 +33,19 @@ namespace Services
             _driverRepository.UpdateDriver(driver);
         }
 
-        public bool DeleteDriver(int id)
+        public Task<bool> DeleteDriver(int id)
         {
             Driver driver = new Driver();
             driver.Id = id;
             return _driverRepository.DeleteDriver(driver);
         }
 
-        public List<Driver> GetDrivers()
+        public Task<List<Driver>> GetDrivers()
         {
             return _driverRepository.GetDrivers();
         }
 
-        public List<Driver> GetAlphabetizedDrivers()
+        public Task<List<Driver>> GetAlphabetizedDrivers()
         {
             return _driverRepository.GetAlphabetizedDrivers();
         }
