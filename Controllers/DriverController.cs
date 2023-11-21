@@ -21,7 +21,7 @@ namespace driver_api.Controllers
             _driverService = driverService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Driver>>> GetAll()
         {
             try
@@ -35,7 +35,7 @@ namespace driver_api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update([FromBody] Driver driver)
         {
             try
@@ -50,7 +50,7 @@ namespace driver_api.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -68,7 +68,7 @@ namespace driver_api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Create([FromBody] Driver driver)
         {
             try
