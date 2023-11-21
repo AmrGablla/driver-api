@@ -24,9 +24,9 @@ public class DriverController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Update([FromBody] Driver driver)
+    public async Task<IActionResult> Update([FromBody] Driver driver)
     {
-        _driverService.UpdateDriver(driver);
+        await _driverService.UpdateDriver(driver);
         return Ok(driver);
     }
 
@@ -40,9 +40,9 @@ public class DriverController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] Driver driver)
+    public async Task<IActionResult> Create([FromBody] Driver driver)
     {
-        _driverService.AddDriver(driver);
+        await _driverService.AddDriver(driver);
         return Ok(driver);
     }
 

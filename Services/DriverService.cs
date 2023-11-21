@@ -6,8 +6,8 @@ namespace Services
 {
     public interface IDriverService
     {
-        void AddDriver(Driver driver);
-        void UpdateDriver(Driver driver);
+        Task AddDriver(Driver driver);
+        Task UpdateDriver(Driver driver);
         Task<bool> DeleteDriver(int id);
         Task<List<Driver>> GetDrivers();
         Task<List<Driver>> GetAlphabetizedDrivers();
@@ -23,14 +23,14 @@ namespace Services
             _driverRepository = driverRepository;
         }
 
-        public void AddDriver(Driver driver)
+        public async Task AddDriver(Driver driver)
         {
-            _driverRepository.AddDriver(driver);
+            await _driverRepository.AddDriver(driver);
         }
 
-        public void UpdateDriver(Driver driver)
+        public async Task UpdateDriver(Driver driver)
         {
-            _driverRepository.UpdateDriver(driver);
+            await _driverRepository.UpdateDriver(driver);
         }
 
         public Task<bool> DeleteDriver(int id)
