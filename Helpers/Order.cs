@@ -4,8 +4,12 @@ namespace Helpers
     {
         public static string Alphabetically(string input)
         {
-            var sortedChars = input.OrderBy(c => char.ToLower(c)).ToArray();
-            return new string(sortedChars);
+            if (input != null)
+            {
+                var sortedChars = input.OrderBy(c => char.ToLower(c)).ToArray();
+                return new string(sortedChars);
+            }
+            return string.Empty;
         }
     }
 }

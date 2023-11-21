@@ -31,13 +31,11 @@ namespace Models
         [Column("PhoneNumber")]
         public string PhoneNumber { get; set; }
 
-
         [Ignore]
         public string FullName
         {
             get { return $"{FirstName} {LastName}"; }
         }
-
 
         [Ignore]
         public string AlphabetizedFullName
