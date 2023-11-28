@@ -84,11 +84,11 @@ namespace driver_api.Controllers
         }
 
         [HttpPost("AddRandoms")]
-        public IActionResult AddRandoms()
+        public async Task<IActionResult> AddRandoms()
         {
             try
             {
-                _driverService.Add10Randoms();
+                await _driverService.Add10Randoms();
                 return NoContent();
             }
             catch (Exception ex)

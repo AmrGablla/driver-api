@@ -11,7 +11,7 @@ namespace Services
         Task<bool> DeleteDriver(int id);
         Task<List<Driver>> GetDrivers();
         Task<List<Driver>> GetAlphabetizedDrivers();
-        void Add10Randoms();
+        Task Add10Randoms();
     }
 
 
@@ -40,9 +40,9 @@ namespace Services
             return _driverRepository.DeleteDriver(driver);
         }
 
-        public Task<List<Driver>> GetDrivers()
+        public async Task<List<Driver>> GetDrivers()
         {
-            return _driverRepository.GetDrivers();
+            return await _driverRepository.GetDrivers();
         }
 
         public Task<List<Driver>> GetAlphabetizedDrivers()
@@ -50,7 +50,7 @@ namespace Services
             return _driverRepository.GetAlphabetizedDrivers();
         }
 
-        public void Add10Randoms()
+        public async Task Add10Randoms()
         {
             for (int i = 0; i < 10; i++)
             {
@@ -62,7 +62,7 @@ namespace Services
                     PhoneNumber = DriverRandoms.GetRandomPhoneNumber()
                 };
 
-                AddDriver(driver);
+                await AddDriver(driver);
             }
         }
     }
